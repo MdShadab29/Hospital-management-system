@@ -1,0 +1,74 @@
+{% include "doctor_header.html" %}
+
+<div class="container" style="margin-left:250px ;">
+    {% if messages %}
+        
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} m-2 " role="alert">{{ message }}</div>
+            {% endfor %}
+        
+    {% endif %}
+</div>
+
+
+<div style="text-align:right;margin-right:50px ;">
+    <h4 style="border-bottom:2px solid black ; margin-left:1700px;">Hi Dr. {{doc.name}}</h4>
+
+</div>
+<br>
+<div>
+    <div class="text-center">
+     <h2 style="color:green;border-bottom:3px solid black;margin-left:250px;margin-right:250px ;">Your Appointments List</h2>   
+    </div>
+</div>
+
+<div style="margin-left:100px; margin-right:100px;">
+    <table class="table table-hover table-danger table-bordered mt-5" style="border:2px;">
+        <thead>
+            <tr>
+                <th scope="col"><h4>Patient Name</h4></th>
+                <th scope="col"><h4>Date</h4></th>
+                <th scope="col"><h4>Slot</h4></th>
+                <th scope="col"><h4>Status</h4></th>
+                <th scope="col"><h4>Action</h4></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for st in appointment%}
+                <tr>
+                    {% if patient %}
+                    <td>{{patient.name}}</td>
+                    {% endif %}
+                    <td>{{st.date}}</td>
+                    {% for slot in slot %}
+                    <td>{{slot.start_time}}-{{slot.end_time}}</td>
+                    {% endfor %}
+                    <!-- <td>{{st.status}}</td> -->
+                    <form action="{% url 'confirm_booking' st.id %}" method="POST">
+                        {% csrf_token %}
+                    <td>
+                        <select name="status" id="status" class="form-control" style="background-color: white;">
+                            
+                            <option value="" selected="">{{st.status}}</option>
+                            
+
+                                
+                            {% for h in status %}
+                            <option value="{{h.pk}}"  >{{h.name}}</option>
+                                {% endfor %}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        
+                        <button class="btn btn-success" style="margin-left:20px;">Save</button>
+                    </form>
+                    </td>
+                </tr>
+                {% endfor%}
+                
+        </tbody>
+            
+</table>
+
+</div>

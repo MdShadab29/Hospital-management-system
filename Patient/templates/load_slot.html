@@ -1,0 +1,4 @@
+<option value="">---choose slot---</option>
+{% for slot in slots%}
+<option value="{{slot.pk}}">{{slot.start_time}}-{{slot.end_time}}</option>
+{% endfor %}

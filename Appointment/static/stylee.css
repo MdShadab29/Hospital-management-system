@@ -1,0 +1,44 @@
+.sidebar{
+    
+    padding-top: 30px;
+    position: fixed;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: #2F323A;
+}
+
+.sidebar a{
+    display: block;
+    width: 100%;
+    line-height: 60px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: background;
+}
+
+.sidebar a:hover{
+    background: #e8e6c8;
+
+}
+
+.container-fluid{
+    margin-left: 100px;
+}
+
+label #sidebar_btn{
+    z-index: 1;
+    color: #fff;
+    position: fixed;
+    cursor: pointer;
+    left: 300px;
+    font-size: 20px;
+    margin: 5px 0;
+    transition: 0.5s;
+    transition-property: color;
+}
+
+label #sidebar_btn:hover{
+    color: #2d7bc4;
+
+}

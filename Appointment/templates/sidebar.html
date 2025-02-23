@@ -1,0 +1,15 @@
+{% load static %}
+<head>
+    <link href="{% static 'stylee.css' %}" rel="stylesheet"></head>
+
+
+<div class="sidebar mt-5">
+    <ul>
+        <a href="{% url 'home' %}" class="nav-item nav-link ">Home</a>
+        <a href="{% url 'hospital' %}" class="nav-item nav-link ">Hospital</a>
+        <a href="{% url 'doctor' %}" class="nav-item nav-link">Doctor</a>
+        <a href="{% url 'appointment' %}" class="nav-item nav-link">Appointments</a>
+        <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+    </ul>
+
+</div>

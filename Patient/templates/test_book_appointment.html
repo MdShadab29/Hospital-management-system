@@ -1,0 +1,84 @@
+{% include 'patient_header.html' %}
+
+<body>
+    <div style="margin-left:200px;margin-right: 200px;">
+    <h3 class="text-center" style="color:green ;border-bottom: 3px solid black;">Proceed to confirm your booking</h3>
+    </div>
+    <br>
+    
+    <div class="container" style="margin-left:250px ;">
+        {% if messages %}
+            
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} m-2 " role="alert">{{ message }}</div>
+                {% endfor %}
+            
+        {% endif %}
+    </div>
+    <form action="" method="post" class="form-control text-center" id="Appointment" data-slot-url="{% url 'ajax_load_available_slot'%}">
+        {% csrf_token %}
+        <div class="col-md-6" style="margin-left:30px ;">
+            <label for="">Patient Name</label>
+                <input type="text" class="form-control" style="margin-left:440px ;" name="patient" id="patient" value="{{pa.name}}" readonly >
+            
+            
+        </div>
+        <br>
+        <div class="col-md-6" style="margin-left:30px ;">
+            <label for="">Doctor Name</label>
+            <input type="text" class="form-control" style="margin-left:440px ;" name="doctor" doctor_id ="{{pi.id}}" id="doctor" value="{{pi.name}}" readonly>
+        </div>
+        <br>
+        <div class="col-md-6" style="margin-left:30px ;">
+            <label for="">Hospital</label>
+            <select name="hospital" id="hospital" class="form-control" style="margin-left:440px ;">
+                <option value="{{pi.hospital.id}}" >{{pi.hospital}}</option>
+            </select>
+        </div>
+        <br>
+        <div class="col-md-6" style="margin-left:30px ;">
+            <label for="">Date</label>
+           
+            <input type="date" class="form-control" style="margin-left:440px ;"  name="date" id="date" required>
+        </div>
+        <br>
+        <div class="col-md-6" style="margin-left:30px ;">
+            <label for="">Slot</label>
+            
+            <select name="slot" id="slot" class="form-control" style="margin-left:440px ;background-color: white;" required>
+                    
+                    
+            </select>
+                    
+        </div>
+        <br>
+        
+       
+        
+        <input type="submit" class="btn btn-success" style="margin-left:100px ;padding: auto;" value="Save">
+    </form>
+</body>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $("#date").change(function(){
+        const url = $("#Appointment").attr("data-slot-url");
+        const dateId = $(this).val();
+        var doctorId = $("#doctor").attr("doctor_id");
+
+        $.ajax({
+            url:url,
+            data:{
+                'date':dateId,
+                'doctor':doctorId
+            },
+            success: function(data){
+                $("#slot").html(data);
+            }
+        })
+    })
+    
+</script>
+
+

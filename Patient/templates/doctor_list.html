@@ -1,0 +1,47 @@
+
+{% load static %}
+{% include 'patient_header.html' %}
+
+
+<body >
+<div class="form-float">
+    <div class="container" style="margin-left:250px;">
+        {% if messages %}
+            
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} m-2 " role="alert">{{ message }}</div>
+                {% endfor %}
+            
+        {% endif %}
+    </div>
+
+<div class="col-md-7 m-3" >
+    <h3 style="border-bottom:2px solid black;margin-left: 400px;color: green;" class="text-center">Show Doctor Details</h3>
+    <table class="table table-hover table-danger table-bordered mt-5" style="margin-top:100p; margin-left: 300px;">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Hospital</th>
+                <th scope="col">Speciality</th>
+                
+               
+                <th scope="col">Book Appointment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for st in doctor %}
+                <tr>
+                    <td>{{st.id}}</td>
+                    <td>{{st.name}}</td>
+                    <td>{{st.hospital}}</td>
+                    <td>{{st.speciality}}</td>
+                    
+                   
+                    <td>
+                        <a href="{% url 'test_book_appointment' st.id %}" ><button class="btn btn-dark" style="margin-left:40px ;">Book</button></a>
+                    </td>
+                   
+                    
+                </tr>
+            {% endfor %}
